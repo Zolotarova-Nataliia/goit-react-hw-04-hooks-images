@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 
 export class SearchBar extends Component {
   state = {
@@ -13,7 +14,11 @@ export class SearchBar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.query.trim() === '') {
-      alert('Введите что-нибудь');
+      toast('Введите что-нибудь', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
 
       return;
     }

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import ImageGallery from './Gallery/ImageGallery/ImageGallery';
 import Button from './Gallery/Button/Button';
 import { fetchPicsApi } from './Services/fetchAPI';
 import { SearchBar } from 'components';
+
 export class App extends Component {
   state = {
     pictures: [],
@@ -19,14 +23,16 @@ export class App extends Component {
     const currentPage = this.state.page;
     const prevFilter = prevState.filter;
     const currentFilter = this.state.filter;
-    console.log({ prevFilter, currentFilter, prevPage, currentPage });
+    if (prevFilter !== currentFilter) {
+      this.setState({ pictures: [] });
+    }
     if (prevPage !== currentPage || prevFilter !== currentFilter) {
       this.fetchImages();
     }
   }
 
   handleFormSubmit = query => {
-    this.setState({ filter: query, page: 1, pictures: [] });
+    this.setState({ filter: query, page: 1 });
   };
 
   fetchImages = async () => {
@@ -53,8 +59,14 @@ export class App extends Component {
     return (
       <>
         <SearchBar onSubmitForm={handleFormSubmit} />
-        {filter !== '' && <ImageGallery items={pictures} />}
+        {filter === '' ? (
+          <p>Enter something</p>
+        ) : (
+          <ImageGallery items={pictures} />
+        )}
+
         {pictures.length !== 0 && <Button onClick={onLoadMoreClick} />}
+        <ToastContainer />
       </>
     );
   }

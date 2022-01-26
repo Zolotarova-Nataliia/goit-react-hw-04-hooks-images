@@ -8,7 +8,7 @@ export async function fetchPicsApi(query, page) {
     .then(data =>
       data.hits.map(hit => {
         return {
-          id: hit.id,
+          id: hit.webformatURL,
           webformatURL: hit.webformatURL,
           largeImageURL: hit.largeImageURL,
           tags: hit.tags,
