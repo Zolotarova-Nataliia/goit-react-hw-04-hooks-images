@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
+import { BsSearch } from 'react-icons/bs';
+import PropTypes from 'prop-types';
+import { Header, SearchForm, SearchBtn, SearchInput } from './SearchBar.styled';
 
-export class SearchBar extends Component {
+export class Searchbar extends Component {
   state = {
     query: '',
   };
@@ -14,7 +17,7 @@ export class SearchBar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.query.trim() === '') {
-      toast('Введите что-нибудь', {
+      toast('Введите что-нибудь! :)', {
         position: 'top-right',
         autoClose: 3000,
         hideProgressBar: false,
@@ -28,20 +31,25 @@ export class SearchBar extends Component {
 
   render() {
     return (
-      <header>
-        <form onSubmit={this.handleSubmit}>
-          <input
+      <Header>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchInput
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
             onChange={this.handleChange}
           />
-          <button type="submit">
-            <span>Search</span>
-          </button>
-        </form>
-      </header>
+
+          <SearchBtn type="submit">
+            <BsSearch />
+          </SearchBtn>
+        </SearchForm>
+      </Header>
     );
   }
 }
+Searchbar.propTypes = {
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
