@@ -87,23 +87,27 @@ export class App extends Component {
     const { pictures, filter } = this.state;
     const { handleFormSubmit, onLoadMoreClick } = this;
     return (
-      <Container>
+      <>
         <Searchbar onSubmitForm={handleFormSubmit} />
-        {filter === '' ? (
-          <>
-            <Message>Введите что-нибудь :)</Message>
-            <CorgiMessage>
-              <p>Желательно "corgi"</p>
-              <GiSniffingDog />
-            </CorgiMessage>
-          </>
-        ) : (
-          <ImageGallery items={pictures} />
-        )}
-        {this.state.loading && <Spinner name="three-bounce" color="#fbcdf2" />}
-        {pictures.length !== 0 && <Button onClick={onLoadMoreClick} />}
-        <ToastContainer />
-      </Container>
+        <Container>
+          {filter === '' ? (
+            <>
+              <Message>Введите что-нибудь :)</Message>
+              <CorgiMessage>
+                <p>Желательно "corgi"</p>
+                <GiSniffingDog />
+              </CorgiMessage>
+            </>
+          ) : (
+            <ImageGallery items={pictures} />
+          )}
+          {this.state.loading && (
+            <Spinner name="three-bounce" color="#fbcdf2" />
+          )}
+          {pictures.length !== 0 && <Button onClick={onLoadMoreClick} />}
+          <ToastContainer />
+        </Container>
+      </>
     );
   }
 }
