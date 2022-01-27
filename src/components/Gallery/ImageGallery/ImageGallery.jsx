@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { RiCloseCircleLine } from 'react-icons/ri';
 import { GalleryList } from './ImageGallery.styled';
 import ImageGalleryItem from './ImageGalleryItem';
 import Modal from '../Modal/Modal';
+import { ModalBtnClose } from '../Modal/Modal.styled';
+
 class ImageGallery extends Component {
   state = {
     modalImage: '',
@@ -22,10 +25,9 @@ class ImageGallery extends Component {
         {showModal && (
           <Modal>
             <img src={this.state.modalImage} alt=""></img>
-            <button type="button" onClick={this.onCloseBtnClick}>
-              {' '}
-              Close
-            </button>
+            <ModalBtnClose type="button" onClick={this.onCloseBtnClick}>
+              <RiCloseCircleLine />
+            </ModalBtnClose>
           </Modal>
         )}
         {items.map(({ id, webformatURL, tags, largeImageURL }) => (

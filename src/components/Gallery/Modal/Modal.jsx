@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ModalWindov, Overlay } from './Modal.styled';
+import { ModalWindow, Overlay } from './Modal.styled';
+
 class Modal extends Component {
   render() {
     return (
       <Overlay>
-        <ModalWindov>{this.props.children}</ModalWindov>
+        <ModalWindow>{this.props.children}</ModalWindow>
       </Overlay>
     );
   }
