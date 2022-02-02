@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { GalleryList } from './ImageGallery.styled';
@@ -6,44 +6,38 @@ import ImageGalleryItem from './ImageGalleryItem';
 import Modal from '../Modal/Modal';
 import { ModalBtnClose } from '../Modal/Modal.styled';
 
-class ImageGallery extends Component {
-  state = {
-    modalImage: '',
-  };
-  onImageClick = largeImageURL => {
-    this.setState({ modalImage: largeImageURL });
+export default function ImageGallery(props) {
+  const [modalImg, setModalImg] = useState('');
+  const onImageClick = largeImageURL => {
+    setModalImg(largeImageURL);
   };
 
-  onCloseBtnClick = () => {
-    this.setState({ modalImage: '' });
+  const onCloseBtnClick = () => {
+    setModalImg('');
   };
-  render() {
-    const { items } = this.props;
-    const showModal = Boolean(this.state.modalImage);
-    return (
-      <GalleryList>
-        {showModal && (
-          <Modal>
-            <img src={this.state.modalImage} alt=""></img>
-            <ModalBtnClose type="button" onClick={this.onCloseBtnClick}>
-              <RiCloseCircleLine />
-            </ModalBtnClose>
-          </Modal>
-        )}
-        {items.map(({ id, webformatURL, tags, largeImageURL }) => (
-          <ImageGalleryItem
-            onClick={() => this.onImageClick(largeImageURL)}
-            key={id}
-            tags={tags}
-            webformatURL={webformatURL}
-          />
-        ))}
-      </GalleryList>
-    );
-  }
+
+  const showModal = Boolean(modalImg);
+  return (
+    <GalleryList>
+      {showModal && (
+        <Modal>
+          <img src={modalImg} alt=""></img>
+          <ModalBtnClose type="button" onClick={onCloseBtnClick}>
+            <RiCloseCircleLine />
+          </ModalBtnClose>
+        </Modal>
+      )}
+      {props.items.map(({ id, webformatURL, tags, largeImageURL }) => (
+        <ImageGalleryItem
+          onClick={() => onImageClick(largeImageURL)}
+          key={id}
+          tags={tags}
+          webformatURL={webformatURL}
+        />
+      ))}
+    </GalleryList>
+  );
 }
-
-export default ImageGallery;
 
 ImageGallery.propTypes = {
   onImageClick: PropTypes.func,

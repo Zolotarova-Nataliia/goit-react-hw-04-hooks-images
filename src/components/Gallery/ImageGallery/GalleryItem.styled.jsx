@@ -12,6 +12,6 @@ export const GalleryImage = styled.img`
   object-fit: cover;
   transition: 0.3s;
   &:hover {
-    transform: scale(0.9);
+    transform: scale(1.1);
   }
 `;

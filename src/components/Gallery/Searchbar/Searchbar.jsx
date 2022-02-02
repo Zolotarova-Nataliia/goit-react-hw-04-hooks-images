@@ -1,53 +1,47 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { BsSearch } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import { Header, SearchForm, SearchBtn, SearchInput } from './SearchBar.styled';
 
-export class Searchbar extends Component {
-  state = {
-    query: '',
-  };
-
-  handleChange = event => {
+export default function Searchbar(props) {
+  const [query, setQuery] = useState('');
+  const handleChange = event => {
     const searchQuery = event.target.value.trim();
-    this.setState({ query: searchQuery.toLowerCase() });
+    setQuery(searchQuery.toLowerCase());
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    if (this.state.query.trim() === '') {
+    if (query.trim() === '') {
       toast('Введите что-нибудь! :)', {
         position: 'top-right',
         autoClose: 3000,
         hideProgressBar: false,
       });
-
       return;
     }
 
-    this.props.onSubmitForm(this.state.query);
+    props.onSubmitForm(query);
   };
 
-  render() {
-    return (
-      <Header>
-        <SearchForm onSubmit={this.handleSubmit}>
-          <SearchInput
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            onChange={this.handleChange}
-          />
+  return (
+    <Header>
+      <SearchForm onSubmit={handleSubmit}>
+        <SearchInput
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          onChange={handleChange}
+        />
 
-          <SearchBtn type="submit">
-            <BsSearch />
-          </SearchBtn>
-        </SearchForm>
-      </Header>
-    );
-  }
+        <SearchBtn type="submit">
+          <BsSearch />
+        </SearchBtn>
+      </SearchForm>
+    </Header>
+  );
 }
 Searchbar.propTypes = {
   handleChange: PropTypes.func,

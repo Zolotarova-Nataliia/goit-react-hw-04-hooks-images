@@ -28,10 +28,10 @@ export const ModalBtnClose = styled.button`
   > svg {
     width: 40px;
     height: 40px;
-    fill: #f0e8bb;
+    fill: #f5b766;
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
     &:hover {
-      fill: #f0e8bb;
+      fill: #f5b766;
       transform: scale(1.3);
     }
   }

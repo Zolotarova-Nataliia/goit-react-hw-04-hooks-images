@@ -14,15 +14,7 @@ export const Header = styled.header`
   padding-top: 12px;
   padding-bottom: 12px;
   color: #fff;
-  background: linear-gradient(
-    45deg,
-    #fcf4c9,
-    #fee3e2,
-    #fbcdf2,
-    #e8befa,
-    #abbfff,
-    #bbf3c0
-  );
+  background: linear-gradient(45deg, #fcf4c9, #f7cc93, #f5be77, #f5b766);
 `;
 
 export const SearchForm = styled.form`
